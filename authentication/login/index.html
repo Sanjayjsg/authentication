@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | My Account</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <main class="auth-container">
+
+        <!-- Left side -->
+        <section class="intro-section">
+
+            <div class="logo">
+                <span class="logo-box">A</span>
+                <span>Account</span>
+            </div>
+
+            <div class="intro-content">
+
+                <p class="small-title">WELCOME BACK</p>
+
+                <h1>
+                    Good to see you
+                    <span>again.</span>
+                </h1>
+
+                <p class="intro-text">
+                    Sign in to access your account and continue
+                    where you left off.
+                </p>
+
+                <div class="intro-info">
+                    <div class="info-item">
+                        <span class="check">✓</span>
+                        <p>Simple and secure login</p>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="check">✓</span>
+                        <p>Fast account access</p>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="check">✓</span>
+                        <p>Works across devices</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Login section -->
+        <section class="form-section">
+
+            <div class="form-box">
+
+                <div class="form-header">
+
+                    <p class="form-label">ACCOUNT LOGIN</p>
+
+                    <h2>Sign in</h2>
+
+                    <p>
+                        Enter your details to access your account.
+                    </p>
+
+                </div>
+
+
+                <!-- Message -->
+                <div id="message" class="message"></div>
+
+
+                <form id="loginForm">
+
+                    <!-- Email -->
+                    <div class="input-group">
+
+                        <label for="email">
+                            Email address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Password -->
+                    <div class="input-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="password-field">
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                id="showPassword"
+                                class="password-button"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Options -->
+                    <div class="form-options">
+
+                        <label class="remember-me">
+
+                            <input
+                                type="checkbox"
+                                id="rememberMe"
+                            >
+
+                            <span>Remember me</span>
+
+                        </label>
+
+                        <button
+                            type="button"
+                            id="forgotPassword"
+                            class="forgot-button"
+                        >
+                            Forgot password?
+                        </button>
+
+                    </div>
+
+
+                    <!-- Login button -->
+                    <button
+                        type="submit"
+                        class="submit-button"
+                    >
+                        Sign in
+                    </button>
+
+                </form>
+
+
+                <div class="separator">
+                    <span>OR</span>
+                </div>
+
+
+                <p class="register-link">
+                    Don't have an account?
+                    <a href="../Register/index.html">
+                        Create an account
+                    </a>
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const loginForm = document.getElementById("loginForm");
+
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+
+        const message = document.getElementById("message");
+
+        const showPassword =
+            document.getElementById("showPassword");
+
+        const rememberMe =
+            document.getElementById("rememberMe");
+
+        const forgotPassword =
+            document.getElementById("forgotPassword");
+
+
+        /*
+         * Show / hide password
+         */
+
+        showPassword.addEventListener("click", function () {
+
+            if (passwordInput.type === "password") {
+
+                passwordInput.type = "text";
+                showPassword.textContent = "Hide";
+
+            } else {
+
+                passwordInput.type = "password";
+                showPassword.textContent = "Show";
+
+            }
+
+        });
+
+
+        /*
+         * Display message
+         */
+
+        function showMessage(text, type) {
+
+            message.textContent = text;
+
+            message.className = "message " + type;
+
+        }
+
+
+        /*
+         * Get registered users
+         */
+
+        function getUsers() {
+
+            const users =
+                localStorage.getItem("users");
+
+            return users ? JSON.parse(users) : [];
+
+        }
+
+
+        /*
+         * Login
+         */
+
+        loginForm.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            const email =
+                emailInput.value.trim().toLowerCase();
+
+            const password =
+                passwordInput.value.trim();
+
+
+            if (!email || !password) {
+
+                showMessage(
+                    "Please enter your email and password.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const users = getUsers();
+
+
+            const user = users.find(function (account) {
+
+                return (
+                    account.email === email &&
+                    account.password === password
+                );
+
+            });
+
+
+            if (!user) {
+
+                const existingUser =
+                    users.some(function (account) {
+
+                        return account.email === email;
+
+                    });
+
+
+                if (existingUser) {
+
+                    showMessage(
+                        "The password you entered is incorrect.",
+                        "error"
+                    );
+
+                } else {
+
+                    showMessage(
+                        "No account was found with this email.",
+                        "error"
+                    );
+
+                }
+
+                return;
+
+            }
+
+
+            /*
+             * Save logged-in user
+             */
+
+            const loggedInUser = {
+
+                name: user.name,
+                email: user.email,
+                loginTime: new Date().toISOString()
+
+            };
+
+
+            localStorage.setItem(
+                "loggedInUser",
+                JSON.stringify(loggedInUser)
+            );
+
+
+            if (rememberMe.checked) {
+
+                localStorage.setItem(
+                    "rememberedEmail",
+                    email
+                );
+
+            } else {
+
+                localStorage.removeItem(
+                    "rememberedEmail"
+                );
+
+            }
+
+
+            showMessage(
+                `Welcome back, ${user.name}! Login successful.`,
+                "success"
+            );
+
+
+            /*
+             * Clear password
+             */
+
+            passwordInput.value = "";
+
+        });
+
+
+        /*
+         * Forgot password
+         */
+
+        forgotPassword.addEventListener("click", function () {
+
+            const email =
+                emailInput.value.trim().toLowerCase();
+
+
+            if (!email) {
+
+                showMessage(
+                    "Enter your email address first.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const users = getUsers();
+
+
+            const userExists =
+                users.some(function (user) {
+
+                    return user.email === email;
+
+                });
+
+
+            if (userExists) {
+
+                showMessage(
+                    "Password reset is not connected to a server yet.",
+                    "info"
+                );
+
+            } else {
+
+                showMessage(
+                    "No account was found with this email.",
+                    "error"
+                );
+
+            }
+
+        });
+
+
+        /*
+         * Load remembered email
+         */
+
+        const rememberedEmail =
+            localStorage.getItem("rememberedEmail");
+
+
+        if (rememberedEmail) {
+
+            emailInput.value = rememberedEmail;
+
+            rememberMe.checked = true;
+
+        }
+
+    </script>
+
+</body>
+</html>

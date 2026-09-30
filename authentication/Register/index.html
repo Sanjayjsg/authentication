@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Account | My Account</title>
+
+    <link rel="stylesheet" href="index.css">
+
+</head>
+
+
+<body>
+
+    <main class="register-container">
+
+
+        <!-- Left information -->
+
+        <section class="intro-section">
+
+            <div class="logo">
+
+                <span class="logo-box">A</span>
+
+                <span>Account</span>
+
+            </div>
+
+
+            <div class="intro-content">
+
+                <p class="small-title">
+                    CREATE YOUR ACCOUNT
+                </p>
+
+
+                <h1>
+                    Start something
+                    <span>new today.</span>
+                </h1>
+
+
+                <p class="intro-text">
+
+                    Create your account in a few simple
+                    steps and get started right away.
+
+                </p>
+
+
+                <div class="benefits">
+
+                    <div class="benefit">
+
+                        <span>✓</span>
+
+                        <div>
+                            <strong>Quick setup</strong>
+
+                            <p>
+                                Create your account in less than a minute.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="benefit">
+
+                        <span>✓</span>
+
+                        <div>
+                            <strong>Easy to use</strong>
+
+                            <p>
+                                A simple experience without unnecessary steps.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="benefit">
+
+                        <span>✓</span>
+
+                        <div>
+                            <strong>Ready when you are</strong>
+
+                            <p>
+                                Sign in anytime using your account details.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Registration -->
+
+        <section class="form-section">
+
+            <div class="form-box">
+
+
+                <div class="form-header">
+
+                    <p class="form-label">
+                        NEW ACCOUNT
+                    </p>
+
+                    <h2>
+                        Create account
+                    </h2>
+
+                    <p>
+                        Enter your details below to get started.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="message"
+                    class="message"
+                ></div>
+
+
+                <form id="registerForm">
+
+
+                    <!-- Name -->
+
+                    <div class="input-group">
+
+                        <label for="name">
+                            Full name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="input-group">
+
+                        <label for="email">
+                            Email address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="input-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="password-field">
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="At least 6 characters"
+                                autocomplete="new-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                id="showPassword"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password strength -->
+
+                    <div class="password-strength">
+
+                        <div class="strength-line">
+
+                            <span id="strengthBar"></span>
+
+                        </div>
+
+                        <small id="strengthText">
+                            Password strength
+                        </small>
+
+                    </div>
+
+
+                    <!-- Confirm password -->
+
+                    <div class="input-group">
+
+                        <label for="confirmPassword">
+                            Confirm password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Enter your password again"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Terms -->
+
+                    <label class="terms">
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                        >
+
+                        <span>
+                            I agree to create an account and use this service.
+                        </span>
+
+                    </label>
+
+
+                    <!-- Register -->
+
+                    <button
+                        type="submit"
+                        class="submit-button"
+                    >
+                        Create account
+                    </button>
+
+
+                </form>
+
+
+                <div class="login-link">
+
+                    Already have an account?
+
+                    <a href="../login/index.html">
+                        Sign in
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="index.js"></script>
+
+</body>
+
+</html>
